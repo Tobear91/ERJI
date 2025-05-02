@@ -11,6 +11,7 @@ return [
 
     'migrations_paths' => [
         'App\Module\User\Migrations' => __DIR__ . '/../src/Module/User/Migrations',
+        'App\Module\Societe\Migrations' => __DIR__ . '/../src/Module/Societe/Migrations',
     ],
     'all_or_nothing' => true,
     'transactional' => true,

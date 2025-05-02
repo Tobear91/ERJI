@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 
-use App\Infrastructure\Doctrine;
+use App\Infrastructure\Doctrine\Doctrine;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Configuration\Migration\PhpFile;
