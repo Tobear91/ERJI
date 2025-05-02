@@ -1,0 +1,56 @@
+# Composer
+/vendor/
+
+# PHPUnit
+/tests/_output/
+phpunit.xml
+phpunit.xml.dist
+
+# PHPStorm (ou autre IDE)
+.idea/
+.vscode/
+
+# Laravel
+/.env
+/.env.*.php
+/storage/
+/public/storage/
+/node_modules/
+npm-debug.log
+
+# Symfony
+/var/
+/vendor/
+/.env
+/.env.local
+/.env.local.php
+/.env.*.local
+/.phpunit.result.cache
+
+# Doctrine
+/.doctrine
+
+# Logs
+/logs/
+/*.log
+
+# Cache
+/cache/
+/tmp/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+*.log
+
+# Ignorer les certificats
+*.crt
+*.key
+*.pem

@@ -1,0 +1,25 @@
+# General
+.DS_Store
+Thumbs.db
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# PHP (Back-end in "api" folder)
+api/vendor/
+api/.env
+api/.env.local
+api/.env.*.local
+api/storage/
+api/bootstrap/cache/
+
+# Vue.js (Front-end in "front" folder)
+front/node_modules/
+front/dist/
+front/.env
+front/.env.local
+front/.env.*.local
+
+_api/
+front/
