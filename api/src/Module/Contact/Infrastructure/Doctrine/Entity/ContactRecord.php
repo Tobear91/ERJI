@@ -2,6 +2,7 @@
 
 namespace App\Module\Contact\Infrastructure\Doctrine\Entity;
 
+use App\Module\Societe\Infrastructure\Doctrine\Entity\SocieteRecord;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
@@ -31,6 +32,10 @@ class ContactRecord
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $updated;
+
+    #[ORM\ManyToOne(targetEntity: SocieteRecord::class, inversedBy: 'contacts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private SocieteRecord $societe;
 
     public function __construct()
     {
@@ -97,5 +102,15 @@ class ContactRecord
     public function setUpdated(DateTimeImmutable $updated): void
     {
         $this->updated = $updated;
+    }
+    
+    public function getSociete(): SocieteRecord
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(SocieteRecord $societe): void
+    {
+        $this->societe = $societe;
     }
 }

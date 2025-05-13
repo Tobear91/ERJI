@@ -2,8 +2,11 @@
 
 namespace App\Module\Societe\Infrastructure\Doctrine\Entity;
 
+use App\Module\Contact\Infrastructure\Doctrine\Entity\ContactRecord;
 use App\Module\SocieteType\Infrastructure\Doctrine\Entity\SocieteTypeRecord;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -37,11 +40,15 @@ class SocieteRecord
     #[ORM\JoinColumn(nullable: false)]
     private SocieteTypeRecord $societe_type;
 
+    #[ORM\OneToMany(mappedBy: 'societe', targetEntity: ContactRecord::class)]
+    private Collection $contacts;
+
     public function __construct()
     {
         $this->id = Uuid::uuid4()->toString();
         $this->created = new DateTimeImmutable();
         $this->updated = new DateTimeImmutable();
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): string
@@ -129,5 +136,10 @@ class SocieteRecord
     {
         $this->societe_type = $societe_type;
         return $this;
+    }
+
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
     }
 }

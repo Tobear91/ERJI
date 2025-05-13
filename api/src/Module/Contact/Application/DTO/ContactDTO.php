@@ -2,6 +2,8 @@
 
 namespace App\Module\Contact\Application\DTO;
 
+use App\Module\Societe\Application\DTO\SocieteDTO;
+
 final class ContactDTO
 {
     public function __construct(
@@ -12,5 +14,6 @@ final class ContactDTO
         public ?string $phone,
         public string $created,
         public string $updated,
+        public SocieteDTO $societe,
     ) {}
 }
