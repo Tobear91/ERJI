@@ -6,6 +6,7 @@ use App\Module\Societe\Application\DTO\SocieteDTO;
 use App\Module\Societe\Domain\Entity\Societe;
 use App\Module\Societe\Infrastructure\Doctrine\Entity\SocieteRecord;
 use App\Module\SocieteType\Application\Service\SocieteTypeMapper;
+use App\Module\SocieteType\Infrastructure\Doctrine\Entity\SocieteTypeRecord;
 
 final class SocieteMapper
 {
@@ -19,7 +20,7 @@ final class SocieteMapper
             city: $record->getCity(),
             created: $record->getCreated(),
             updated: $record->getUpdated(),
-            societe_type: $record->getSocieteType() ? SocieteTypeMapper::toDomain($record->getSocieteType()) : null,
+            societe_type: SocieteTypeMapper::toDomain($record->getSocieteType()),
         );
     }
 
@@ -37,13 +38,14 @@ final class SocieteMapper
         );
     }
 
-    public static function toRecord(Societe $societe): SocieteRecord
+    public static function toRecord(Societe $societe, SocieteTypeRecord $societe_type): SocieteRecord
     {
         $record = new SocieteRecord();
         $record->setName($societe->name);
         $record->setAddress($societe->address);
         $record->setPostalCode($societe->postal_code);
         $record->setCity($societe->city);
+        $record->setSocieteType($societe_type);
         return $record;
     }
 }
