@@ -19,7 +19,11 @@ class Doctrine
     {
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../');
         $dotenv->load();
-        $paths = [__DIR__ . '/../../Module/User/Infrastructure/Doctrine/Entity', __DIR__ . '/../../Module/Societe/Infrastructure/Doctrine/Entity'];
+        $paths = [
+            __DIR__ . '/../../Module/User/Infrastructure/Doctrine/Entity',
+            __DIR__ . '/../../Module/Societe/Infrastructure/Doctrine/Entity',
+            __DIR__ . '/../../Module/SocieteType/Infrastructure/Doctrine/Entity'
+        ];
         $isDevMode = 'true';
 
         $connectionParams = [

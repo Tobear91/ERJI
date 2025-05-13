@@ -2,6 +2,7 @@
 
 namespace App\Module\Societe\Infrastructure\Doctrine\Entity;
 
+use App\Module\SocieteType\Infrastructure\Doctrine\Entity\SocieteTypeRecord;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
@@ -21,7 +22,7 @@ class SocieteRecord
     private string $address;
 
     #[ORM\Column(type: 'string', length: 16)]
-    private string $postalCode;
+    private string $postal_code;
 
     #[ORM\Column(type: 'string', length: 32)]
     private string $city;
@@ -31,6 +32,10 @@ class SocieteRecord
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $updated;
+
+    #[ORM\ManyToOne(targetEntity: SocieteTypeRecord::class, inversedBy: 'societes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private SocieteTypeRecord $societe_type;
 
     public function __construct()
     {
@@ -68,12 +73,12 @@ class SocieteRecord
 
     public function getPostalCode(): string
     {
-        return $this->postalCode;
+        return $this->postal_code;
     }
 
-    public function setPostalCode(string $postalCode): self
+    public function setPostalCode(string $postal_code): self
     {
-        $this->postalCode = $postalCode;
+        $this->postal_code = $postal_code;
         return $this;
     }
 
@@ -113,5 +118,16 @@ class SocieteRecord
     public function update(): void
     {
         $this->updated = new DateTimeImmutable();
+    }
+
+    public function getSocieteType(): SocieteTypeRecord
+    {
+        return $this->societe_type;
+    }
+
+    public function setSocieteType(SocieteTypeRecord $societe_type): self
+    {
+        $this->societe_type = $societe_type;
+        return $this;
     }
 }

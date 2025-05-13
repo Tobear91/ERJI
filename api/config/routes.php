@@ -2,6 +2,8 @@
 
 use App\Module\Societe\Application\Action\SocieteCreateAction;
 use App\Module\Societe\Application\Action\SocieteFindAllAction;
+use App\Module\SocieteType\Application\Action\SocieteTypeCreateAction;
+use App\Module\SocieteType\Application\Action\SocieteTypeFindAllAction;
 use App\Module\User\Application\Action\UserFindAllAction;
 use App\Module\User\Application\Action\UserCreateAction;
 use Slim\Routing\RouteCollectorProxy;
@@ -15,5 +17,9 @@ return function (App $app) {
     $app->group('/societes', function (RouteCollectorProxy $group) {
         $group->get('', SocieteFindAllAction::class);
         $group->post('', SocieteCreateAction::class);
+    });
+    $app->group('/societe-types', function (RouteCollectorProxy $group) {
+        $group->get('', SocieteTypeFindAllAction::class);
+        $group->post('', SocieteTypeCreateAction::class);
     });
 };

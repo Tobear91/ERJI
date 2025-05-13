@@ -23,7 +23,7 @@ final class SocieteMapperTest extends TestCase
         $this->assertInstanceOf(Societe::class, $societe);
         $this->assertSame('Test Company', $societe->name);
         $this->assertSame('123 Test St', $societe->address);
-        $this->assertSame('12345', $societe->postalCode);
+        $this->assertSame('12345', $societe->postal_code);
         $this->assertSame('Test City', $societe->city);
     }
 
@@ -32,7 +32,7 @@ final class SocieteMapperTest extends TestCase
         $societe = new Societe(
             name: 'Test Company',
             address: '123 Test St',
-            postalCode: '12345',
+            postal_code: '12345',
             city: 'Test City'
         );
 
@@ -52,7 +52,7 @@ final class SocieteMapperTest extends TestCase
             id: $uuid,
             name: 'Test Company',
             address: '123 Test St',
-            postalCode: '12345',
+            postal_code: '12345',
             city: 'Test City',
             created: new DateTimeImmutable('2025-05-01 10:00:00'),
             updated: new DateTimeImmutable('2025-05-02 15:00:00')
@@ -64,7 +64,7 @@ final class SocieteMapperTest extends TestCase
         $this->assertSame($uuid, $dto->id);
         $this->assertSame('Test Company', $dto->name);
         $this->assertSame('123 Test St', $dto->address);
-        $this->assertSame('12345', $dto->postalCode);
+        $this->assertSame('12345', $dto->postal_code);
         $this->assertSame('Test City', $dto->city);
         $this->assertSame('2025-05-01 10:00:00', $dto->created);
         $this->assertSame('2025-05-02 15:00:00', $dto->updated);

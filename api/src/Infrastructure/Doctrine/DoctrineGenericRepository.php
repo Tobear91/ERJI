@@ -5,7 +5,7 @@ namespace App\Infrastructure\Doctrine;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-abstract class DoctrineGenericRepository
+abstract class DoctrineGenericRepository implements DoctrineGenericRepositoryInterface
 {
     private EntityRepository $repository;
 
@@ -37,5 +37,16 @@ abstract class DoctrineGenericRepository
     public function findAll(): array
     {
         return $this->repository->findAll();
+    }
+
+    /**
+     * Récupère une entité par son identifiant
+     * @param string $id
+     * @return object|null
+     */
+    public function findOneById(string $id): ?object
+    {
+        $repository = $this->entityManager->getRepository($this->entityClass);
+        return $repository->find($id);
     }
 }

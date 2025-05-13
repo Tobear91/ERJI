@@ -21,7 +21,7 @@ class SocieteValidator
                 new Assert\NotBlank(message: "Lastname should not be blank"),
                 new Assert\Type(['type' => 'string', 'message' => "Lastname should be a string"]),
             ],
-            'postalCode' => [
+            'postal_code' => [
                 new Assert\NotBlank(message: "Postal code should not be blank"),
                 new Assert\Type(['type' => 'string', 'message' => "Postal code should be a string"]),
             ],

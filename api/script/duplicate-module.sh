@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./duplicate-module.sh User Societe
+# Usage: ./duplicate-module.sh OldName NewName
 
 OLD_NAME=$1
 NEW_NAME=$2
@@ -23,21 +23,26 @@ fi
 
 echo "✅ Duplicating $OLD_NAME → $NEW_NAME..."
 
-# Step 1: Copy directory
+# Step 1: Copy the directory
 cp -r "$SRC_DIR" "$DST_DIR"
 
-# Step 2: Replace content inside files
+# Step 2: Replace all content inside files
+echo "🔄 Replacing contents in files..."
 find "$DST_DIR" -type f -exec sed -i \
-    -e "s/\b$OLD_NAME\b/$NEW_NAME/g" \
-    -e "s/\b$OLD_LOWER\b/$NEW_LOWER/g" \
-    -e "s/${OLD_NAME}/${NEW_NAME}/g" \
-    -e "s/${OLD_LOWER}/${NEW_LOWER}/g" \
+    -e "s/$OLD_NAME/$NEW_NAME/g" \
+    -e "s/$OLD_LOWER/$NEW_LOWER/g" \
     {} +
 
-# Step 3: Rename files that contain the old name
-find "$DST_DIR" -depth -name "*$OLD_NAME*" | while read file; do
-    newfile=$(echo "$file" | sed "s/$OLD_NAME/$NEW_NAME/g")
-    mv "$file" "$newfile"
+# Step 3: Rename all files and folders recursively
+echo "🔄 Renaming files and folders..."
+find "$DST_DIR" -depth -name "*$OLD_NAME*" | while read path; do
+    new_path=$(echo "$path" | sed "s/$OLD_NAME/$NEW_NAME/g")
+    mv "$path" "$new_path"
 done
 
-echo "✅ Module duplicated: $DST_DIR"
+find "$DST_DIR" -depth -name "*$OLD_LOWER*" | while read path; do
+    new_path=$(echo "$path" | sed "s/$OLD_LOWER/$NEW_LOWER/g")
+    mv "$path" "$new_path"
+done
+
+echo "✅ Module duplicated successfully at: $DST_DIR"

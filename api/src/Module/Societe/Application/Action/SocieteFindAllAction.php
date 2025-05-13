@@ -5,6 +5,7 @@ namespace App\Module\Societe\Application\Action;
 use App\Module\Societe\Infrastructure\Doctrine\SocieteRepository;
 use App\Module\Societe\Application\Service\SocieteMapper;
 use App\Application\Responder\JsonResponder;
+use App\Module\Societe\Domain\Entity\Societe;
 use Slim\Psr7\Response;
 use Slim\Psr7\Request;
 
