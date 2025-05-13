@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Module\Contact\Application\DTO;
+
+final class ContactDTO
+{
+    public function __construct(
+        public string $id,
+        public string $firstname,
+        public string $lastname,
+        public ?string $email,
+        public ?string $phone,
+        public string $created,
+        public string $updated,
+    ) {}
+}

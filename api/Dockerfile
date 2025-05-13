@@ -37,6 +37,10 @@ COPY . .
 RUN composer dump-autoload --optimize \
     && chown -R www-data:www-data /var/www/html
 
+# 👉 Ajouter le fuseau horaire
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Configurer les variables d'environnement PHP pour la production
 ENV PHP_OPCACHE_ENABLE=1 \
     PHP_OPCACHE_ENABLE_CLI=1 \
