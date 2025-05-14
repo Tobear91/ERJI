@@ -18,7 +18,7 @@ final class LotMapper
             label: $record->getLabel(),
             created: $record->getCreated(),
             updated: $record->getUpdated(),
-            chantier: ChantierMapper::toLightDTO(ChantierMapper::toDomain($record->getChantier())),
+            chantier: ChantierMapper::toLightDTOFromRecord($record->getChantier()),
         );
     }
 
