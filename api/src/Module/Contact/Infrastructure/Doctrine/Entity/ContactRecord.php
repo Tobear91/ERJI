@@ -2,6 +2,8 @@
 
 namespace App\Module\Contact\Infrastructure\Doctrine\Entity;
 
+use App\Module\ContactFunction\Domain\Entity\ContactFunction;
+use App\Module\ContactFunction\Infrastructure\Doctrine\Entity\ContactFunctionRecord;
 use App\Module\Societe\Infrastructure\Doctrine\Entity\SocieteRecord;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,6 +38,10 @@ class ContactRecord
     #[ORM\ManyToOne(targetEntity: SocieteRecord::class, inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
     private SocieteRecord $societe;
+
+    #[ORM\ManyToOne(targetEntity: ContactFunctionRecord::class, inversedBy: 'contacts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ContactFunctionRecord $contact_function;
 
     public function __construct()
     {
@@ -103,7 +109,7 @@ class ContactRecord
     {
         $this->updated = $updated;
     }
-    
+
     public function getSociete(): SocieteRecord
     {
         return $this->societe;
@@ -112,5 +118,15 @@ class ContactRecord
     public function setSociete(SocieteRecord $societe): void
     {
         $this->societe = $societe;
+    }
+
+    public function getContactFunction(): ContactFunctionRecord
+    {
+        return $this->contact_function;
+    }
+
+    public function setContactFunction(ContactFunctionRecord $contact_function): void
+    {
+        $this->contact_function = $contact_function;
     }
 }

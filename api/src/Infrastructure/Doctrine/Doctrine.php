@@ -23,7 +23,8 @@ class Doctrine
             __DIR__ . '/../../Module/User/Infrastructure/Doctrine/Entity',
             __DIR__ . '/../../Module/Societe/Infrastructure/Doctrine/Entity',
             __DIR__ . '/../../Module/SocieteType/Infrastructure/Doctrine/Entity',
-            __DIR__ . '/../../Module/Contact/Infrastructure/Doctrine/Entity'
+            __DIR__ . '/../../Module/Contact/Infrastructure/Doctrine/Entity',
+            __DIR__ . '/../../Module/ContactFunction/Infrastructure/Doctrine/Entity',
         ];
         $isDevMode = 'true';
 

@@ -5,6 +5,8 @@ namespace App\Module\Contact\Application\Service;
 use App\Module\Contact\Application\DTO\ContactDTO;
 use App\Module\Contact\Domain\Entity\Contact;
 use App\Module\Contact\Infrastructure\Doctrine\Entity\ContactRecord;
+use App\Module\ContactFunction\Application\Service\ContactFunctionMapper;
+use App\Module\ContactFunction\Infrastructure\Doctrine\Entity\ContactFunctionRecord;
 use App\Module\Societe\Application\Service\SocieteMapper;
 use App\Module\Societe\Infrastructure\Doctrine\Entity\SocieteRecord;
 
@@ -21,6 +23,7 @@ final class ContactMapper
             created: $record->getCreated(),
             updated: $record->getUpdated(),
             societe: SocieteMapper::toDomain($record->getSociete()),
+            contact_function: ContactFunctionMapper::toDomain($record->getContactFunction()),
         );
     }
 
@@ -35,15 +38,17 @@ final class ContactMapper
             created: $contact->created->format('Y-m-d H:i:s'),
             updated: $contact->updated->format('Y-m-d H:i:s'),
             societe: SocieteMapper::toLightDTO($contact->societe),
+            contact_function: ContactFunctionMapper::toLightDTO($contact->contact_function),
         );
     }
 
-    public static function toRecord(Contact $contact, SocieteRecord $societe): ContactRecord
+    public static function toRecord(Contact $contact, SocieteRecord $societe, ContactFunctionRecord $contact_function): ContactRecord
     {
         $record = new ContactRecord();
         $record->setFirstname($contact->firstname);
         $record->setLastname($contact->lastname);
         $record->setSociete($societe);
+        $record->setContactFunction($contact_function);
 
         if ($contact->email !== null)
             $record->setEmail($contact->email);

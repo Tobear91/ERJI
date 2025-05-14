@@ -19,7 +19,7 @@ class SocieteService
     {
         SocieteValidator::validate($societe_datas);
 
-        $societe_type_id = 'cc46186b-0ac9-4920-b861-205991c0c8f1';
+        $societe_type_id = '2650f11c-6e2a-4499-86a5-c487afb28bf4';
         $societe_type = $this->societe_type_repository->findOneById($societe_type_id);
 
         $societe = new Societe(

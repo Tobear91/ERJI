@@ -2,6 +2,8 @@
 
 use App\Module\Contact\Application\Action\ContactCreateAction;
 use App\Module\Contact\Application\Action\ContactFindAllAction;
+use App\Module\ContactFunction\Application\Action\ContactFunctionCreateAction;
+use App\Module\ContactFunction\Application\Action\ContactFunctionFindAllAction;
 use App\Module\Societe\Application\Action\SocieteCreateAction;
 use App\Module\Societe\Application\Action\SocieteFindAllAction;
 use App\Module\SocieteType\Application\Action\SocieteTypeCreateAction;
@@ -27,5 +29,9 @@ return function (App $app) {
     $app->group('/contacts', function (RouteCollectorProxy $group) {
         $group->get('', ContactFindAllAction::class);
         $group->post('', ContactCreateAction::class);
+    });
+    $app->group('/contact-functions', function (RouteCollectorProxy $group) {
+        $group->get('', ContactFunctionFindAllAction::class);
+        $group->post('', ContactFunctionCreateAction::class);
     });
 };

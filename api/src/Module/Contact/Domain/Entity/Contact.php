@@ -2,6 +2,7 @@
 
 namespace App\Module\Contact\Domain\Entity;
 
+use App\Module\ContactFunction\Domain\Entity\ContactFunction;
 use App\Module\Societe\Domain\Entity\Societe;
 use DateTimeImmutable;
 
@@ -11,6 +12,7 @@ final class Contact
         public string $firstname,
         public string $lastname,
         public Societe $societe,
+        public ContactFunction $contact_function,
         public ?string $email = null,
         public ?string $phone = null,
         public readonly ?string $id = null,
