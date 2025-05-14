@@ -34,7 +34,7 @@ final class ContactMapper
             phone: $contact->phone,
             created: $contact->created->format('Y-m-d H:i:s'),
             updated: $contact->updated->format('Y-m-d H:i:s'),
-            societe: SocieteMapper::toDTO($contact->societe),
+            societe: SocieteMapper::toLightDTO($contact->societe),
         );
     }
 

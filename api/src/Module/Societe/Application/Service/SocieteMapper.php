@@ -3,6 +3,7 @@
 namespace App\Module\Societe\Application\Service;
 
 use App\Module\Societe\Application\DTO\SocieteDTO;
+use App\Module\Societe\Application\DTO\SocieteLightDTO;
 use App\Module\Societe\Domain\Entity\Societe;
 use App\Module\Societe\Infrastructure\Doctrine\Entity\SocieteRecord;
 use App\Module\SocieteType\Application\Service\SocieteTypeMapper;
@@ -34,7 +35,18 @@ final class SocieteMapper
             city: $societe->city,
             created: $societe->created->format('Y-m-d H:i:s'),
             updated: $societe->updated->format('Y-m-d H:i:s'),
-            societe_type: SocieteTypeMapper::toDTO($societe->societe_type),
+            societe_type: SocieteTypeMapper::toLightDTO($societe->societe_type),
+        );
+    }
+
+    public static function toLightDTO(Societe $societe): SocieteLightDTO
+    {
+        return new SocieteLightDTO(
+            name: $societe->name,
+            address: $societe->address,
+            postal_code: $societe->postal_code,
+            city: $societe->city,
+            societe_type: SocieteTypeMapper::toLightDTO($societe->societe_type),
         );
     }
 

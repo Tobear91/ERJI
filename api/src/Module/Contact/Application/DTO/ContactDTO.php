@@ -2,7 +2,7 @@
 
 namespace App\Module\Contact\Application\DTO;
 
-use App\Module\Societe\Application\DTO\SocieteDTO;
+use App\Module\Societe\Application\DTO\SocieteLightDTO;
 
 final class ContactDTO
 {
@@ -14,6 +14,6 @@ final class ContactDTO
         public ?string $phone,
         public string $created,
         public string $updated,
-        public SocieteDTO $societe,
+        public SocieteLightDTO $societe,
     ) {}
 }

@@ -3,6 +3,7 @@
 namespace App\Module\SocieteType\Application\Service;
 
 use App\Module\SocieteType\Application\DTO\SocieteTypeDTO;
+use App\Module\SocieteType\Application\DTO\SocieteTypeLightDTO;
 use App\Module\SocieteType\Domain\Entity\SocieteType;
 use App\Module\SocieteType\Infrastructure\Doctrine\Entity\SocieteTypeRecord;
 
@@ -22,6 +23,15 @@ final class SocieteTypeMapper
     {
         return new SocieteTypeDTO(
             id: $societetype->id,
+            label: $societetype->label,
+            created: $societetype->created->format('Y-m-d H:i:s'),
+            updated: $societetype->updated->format('Y-m-d H:i:s'),
+        );
+    }
+
+    public static function toLightDTO(SocieteType $societetype): SocieteTypeLightDTO
+    {
+        return new SocieteTypeLightDTO(
             label: $societetype->label,
         );
     }

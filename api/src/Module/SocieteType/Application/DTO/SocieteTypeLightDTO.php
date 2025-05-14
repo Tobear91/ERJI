@@ -2,12 +2,9 @@
 
 namespace App\Module\SocieteType\Application\DTO;
 
-final class SocieteTypeDTO
+final class SocieteTypeLightDTO
 {
     public function __construct(
-        public string $id,
         public string $label,
-        public string $created,
-        public string $updated,
     ) {}
 }
