@@ -2,7 +2,10 @@
 
 namespace App\Module\Chantier\Infrastructure\Doctrine\Entity;
 
+use App\Module\Lot\Infrastructure\Doctrine\Entity\LotRecord;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -32,9 +35,15 @@ class ChantierRecord
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $updated;
 
+    #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: LotRecord::class)]
+    private Collection $lots;
+
     public function __construct()
     {
         $this->id = Uuid::uuid4()->toString();
+        $this->created = new DateTimeImmutable();
+        $this->updated = new DateTimeImmutable();
+        $this->lots = new ArrayCollection();
     }
 
     public function getId(): string
@@ -111,5 +120,10 @@ class ChantierRecord
     public function update(): void
     {
         $this->updated = new DateTimeImmutable();
+    }
+
+    public function getLots(): Collection
+    {
+        return $this->lots;
     }
 }

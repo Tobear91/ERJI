@@ -1,9 +1,13 @@
 <?php
 
+use App\Module\Chantier\Application\Action\ChantierCreateAction;
+use App\Module\Chantier\Application\Action\ChantierFindAllAction;
 use App\Module\Contact\Application\Action\ContactCreateAction;
 use App\Module\Contact\Application\Action\ContactFindAllAction;
 use App\Module\ContactFunction\Application\Action\ContactFunctionCreateAction;
 use App\Module\ContactFunction\Application\Action\ContactFunctionFindAllAction;
+use App\Module\Lot\Application\Action\LotCreateAction;
+use App\Module\Lot\Application\Action\LotFindAllAction;
 use App\Module\Societe\Application\Action\SocieteCreateAction;
 use App\Module\Societe\Application\Action\SocieteFindAllAction;
 use App\Module\SocieteType\Application\Action\SocieteTypeCreateAction;
@@ -33,5 +37,13 @@ return function (App $app) {
     $app->group('/contact-functions', function (RouteCollectorProxy $group) {
         $group->get('', ContactFunctionFindAllAction::class);
         $group->post('', ContactFunctionCreateAction::class);
+    });
+    $app->group('/chantiers', function (RouteCollectorProxy $group) {
+        $group->get('', ChantierFindAllAction::class);
+        $group->post('', ChantierCreateAction::class);
+    });
+    $app->group('/lots', function (RouteCollectorProxy $group) {
+        $group->get('', LotFindAllAction::class);
+        $group->post('', LotCreateAction::class);
     });
 };
