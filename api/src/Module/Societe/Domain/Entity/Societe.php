@@ -12,9 +12,10 @@ final class Societe
         public string $address,
         public string $postal_code,
         public string $city,
-        public SocieteType $societe_type,
+        public ?SocieteType $societe_type = null,
         public readonly ?string $id = null,
         public readonly ?DateTimeImmutable $created = null,
         public ?DateTimeImmutable $updated = null,
+        public ?array $contacts = null
     ) {}
 }

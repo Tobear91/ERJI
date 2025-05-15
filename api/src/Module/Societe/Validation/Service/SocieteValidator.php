@@ -29,6 +29,9 @@ class SocieteValidator
                 new Assert\NotBlank(message: "City should not be blank"),
                 new Assert\Type(['type' => 'string', 'message' => "City should be a string"]),
             ],
+            'societe_type_id' => [
+                new Assert\Uuid(message: "Societe type ID should be a valid UUID"),
+            ],
         ]);
 
         $violations = $validator->validate($data, $constraints);

@@ -36,6 +36,13 @@ final class SocieteTypeMapper
         );
     }
 
+    public static function toLightDTOFromRecord(SocieteTypeRecord $record): SocieteTypeLightDTO
+    {
+        return new SocieteTypeLightDTO(
+            label: $record->getLabel(),
+        );
+    }
+
     public static function toRecord(SocieteType $societeType): SocieteTypeRecord
     {
         $record = new SocieteTypeRecord();

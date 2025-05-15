@@ -3,6 +3,7 @@
 namespace App\Module\Contact\Application\Service;
 
 use App\Module\Contact\Application\DTO\ContactDTO;
+use App\Module\Contact\Application\DTO\ContactLightDTO;
 use App\Module\Contact\Domain\Entity\Contact;
 use App\Module\Contact\Infrastructure\Doctrine\Entity\ContactRecord;
 use App\Module\ContactFunction\Application\Service\ContactFunctionMapper;
@@ -22,7 +23,7 @@ final class ContactMapper
             phone: $record->getPhone(),
             created: $record->getCreated(),
             updated: $record->getUpdated(),
-            societe: SocieteMapper::toDomain($record->getSociete()),
+            societe: SocieteMapper::toLightDTOFromRecord($record->getSociete()),
             contact_function: ContactFunctionMapper::toDomain($record->getContactFunction()),
         );
     }
@@ -37,7 +38,19 @@ final class ContactMapper
             phone: $contact->phone,
             created: $contact->created->format('Y-m-d H:i:s'),
             updated: $contact->updated->format('Y-m-d H:i:s'),
-            societe: SocieteMapper::toLightDTO($contact->societe),
+            societe: $contact->societe,
+            contact_function: ContactFunctionMapper::toLightDTO($contact->contact_function),
+        );
+    }
+
+    public static function toLightDTO(Contact $contact): ContactLightDTO
+    {
+        return new ContactLightDTO(
+            id: $contact->id,
+            firstname: $contact->firstname,
+            lastname: $contact->lastname,
+            email: $contact->email,
+            phone: $contact->phone,
             contact_function: ContactFunctionMapper::toLightDTO($contact->contact_function),
         );
     }

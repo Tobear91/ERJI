@@ -15,5 +15,6 @@ final class SocieteDTO
         public string $created,
         public string $updated,
         public SocieteTypeLightDTO $societe_type,
+        public ?array $contacts = null,
     ) {}
 }

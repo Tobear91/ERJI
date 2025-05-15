@@ -11,7 +11,6 @@ final class Chantier
         public string $address,
         public string $postal_code,
         public string $city,
-        /** @var Lot[] */
         public ?array $lots = [],
         public readonly ?string $id = null,
         public readonly ?DateTimeImmutable $created = null,

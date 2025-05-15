@@ -19,21 +19,19 @@ class SocieteService
     {
         SocieteValidator::validate($societe_datas);
 
-        $societe_type_id = '2650f11c-6e2a-4499-86a5-c487afb28bf4';
-        $societe_type = $this->societe_type_repository->findOneById($societe_type_id);
+        $societe_type = $this->societe_type_repository->findOneById($societe_datas['societe_type_id']);
 
         $societe = new Societe(
             name: $societe_datas['name'],
             address: $societe_datas['address'],
             postal_code: $societe_datas['postal_code'],
             city: $societe_datas['city'],
-            societe_type: SocieteTypeMapper::toDomain($societe_type),
         );
 
         $record = SocieteMapper::toRecord($societe, $societe_type);
 
         $this->societe_repository->save($record);
 
-        return SocieteMapper::toDTO(SocieteMapper::toDomain($record));
+        return SocieteMapper::toDTO(SocieteMapper::toDomain($record), false);
     }
 }
