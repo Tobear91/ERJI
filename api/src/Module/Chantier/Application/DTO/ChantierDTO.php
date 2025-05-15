@@ -12,7 +12,7 @@ final class ChantierDTO
         public string $city,
         public string $created,
         public string $updated,
-        /** @var LotDTO[] */
-        public array $lots,
+        /** @var LotLightDTO[] */
+        public ?array $lots = null,
     ) {}
 }

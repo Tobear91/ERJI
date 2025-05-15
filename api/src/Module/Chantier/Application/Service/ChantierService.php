@@ -28,6 +28,6 @@ class ChantierService
 
         $this->chantier_repository->save($record);
 
-        return ChantierMapper::toDTO(ChantierMapper::toDomain($record));
+        return ChantierMapper::toDTO(ChantierMapper::toDomain($record), false);
     }
 }

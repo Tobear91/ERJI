@@ -18,8 +18,37 @@ final readonly class JsonResponder
         mixed $data = null,
         int $status = 200,
     ): ResponseInterface {
-        $response->getBody()->write((string)json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PARTIAL_OUTPUT_ON_ERROR));
+        // Nettoyage des valeurs nulles récursivement
+        $cleanData = $this->removeNullValues($data);
+        $response->getBody()->write((string)json_encode($cleanData, JSON_UNESCAPED_SLASHES | JSON_PARTIAL_OUTPUT_ON_ERROR));
         $response = $response->withStatus($status);
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * Supprime récursivement toutes les valeurs nulles d'un tableau ou d'un objet.
+     * @param mixed $data
+     * @return mixed
+     */
+    private function removeNullValues(mixed $data): mixed
+    {
+        if (is_array($data)) {
+            $filtered = array_map([$this, 'removeNullValues'], $data);
+            return array_filter($filtered, fn($value) => $value !== null);
+        }
+
+        if (is_object($data)) {
+            $vars = get_object_vars($data);
+            $filtered = [];
+            foreach ($vars as $key => $value) {
+                $cleaned = $this->removeNullValues($value);
+                if ($cleaned !== null) {
+                    $filtered[$key] = $cleaned;
+                }
+            }
+            return $filtered;
+        }
+
+        return $data;
     }
 }

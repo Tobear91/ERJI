@@ -31,11 +31,11 @@ final class ChantierMapper
         );
     }
 
-    public static function toDTO(Chantier $chantier): ChantierDTO
+    public static function toDTO(Chantier $chantier, bool $includeEmptyLots = true): ChantierDTO
     {
         $lotDTOs = array_map(
             fn(Lot $lot) => LotMapper::toLightDTO($lot),
-            $chantier->lots
+            $chantier->lots ?? []
         );
 
         return new ChantierDTO(
@@ -46,7 +46,7 @@ final class ChantierMapper
             city: $chantier->city,
             created: $chantier->created->format('Y-m-d H:i:s'),
             updated: $chantier->updated->format('Y-m-d H:i:s'),
-            lots: $lotDTOs,
+            lots: $includeEmptyLots ? $lotDTOs : (!empty($lotDTOs) ? $lotDTOs : null),
         );
     }
 
