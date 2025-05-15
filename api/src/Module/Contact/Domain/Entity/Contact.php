@@ -11,8 +11,8 @@ final class Contact
     public function __construct(
         public string $firstname,
         public string $lastname,
-        public SocieteLightDTO $societe,
-        public ContactFunction $contact_function,
+        public ?SocieteLightDTO $societe = null,
+        public ?ContactFunction $contact_function = null,
         public ?string $email = null,
         public ?string $phone = null,
         public readonly ?string $id = null,

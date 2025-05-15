@@ -27,6 +27,12 @@ class ContactValidator
             'phone' => new Assert\Optional([
                 new Assert\Type(['type' => 'string', 'message' => "Phone should be a string"]),
             ]),
+            'societe_id' => [
+                new Assert\Uuid(message: "Societe ID should be a valid UUID"),
+            ],
+            'contact_function_id' => [
+                new Assert\Uuid(message: "Contact fonction ID should be a valid UUID"),
+            ],
         ]);
 
         $violations = $validator->validate($data, $constraints);

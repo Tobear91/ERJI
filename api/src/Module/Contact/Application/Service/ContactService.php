@@ -21,19 +21,14 @@ class ContactService
     {
         ContactValidator::validate($contact_datas);
 
-        $societe_id = 'e078a387-683d-4235-81eb-362533a9820b';
-        $societe = $this->societe_repository->findOneById($societe_id);
-
-        $contact_function_id = '206268b8-2a1a-4f83-8fe9-ed1f715bf771';
-        $contact_function = $this->contact_function_repository->findOneById($contact_function_id);
+        $societe = $this->societe_repository->findOneById($contact_datas['societe_id']);
+        $contact_function = $this->contact_function_repository->findOneById($contact_datas['contact_function_id']);
 
         $contact = new Contact(
             firstname: $contact_datas['firstname'],
             lastname: $contact_datas['lastname'],
             email: $contact_datas['email'] ?? null,
             phone: $contact_datas['phone'] ?? null,
-            societe: SocieteMapper::toDomain($societe),
-            contact_function: ContactFunctionMapper::toDomain($contact_function),
         );
 
         $record = ContactMapper::toRecord($contact, $societe, $contact_function);
