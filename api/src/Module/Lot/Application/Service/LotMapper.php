@@ -22,14 +22,14 @@ final class LotMapper
         );
     }
 
-    public static function toDTO(Lot $lot): LotDTO
+    public static function toDTO(Lot $lot, bool $includeChantier = true): LotDTO
     {
         return new LotDTO(
             id: $lot->id,
             label: $lot->label,
             created: $lot->created->format('Y-m-d H:i:s'),
             updated: $lot->updated->format('Y-m-d H:i:s'),
-            chantier: $lot->chantier,
+            chantier: $includeChantier ? $lot->chantier : null,
         );
     }
 

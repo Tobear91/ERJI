@@ -10,7 +10,7 @@ final class Lot
 {
     public function __construct(
         public string $label,
-        public ChantierLightDTO $chantier,
+        public ?ChantierLightDTO $chantier = null,
         public readonly ?string $id = null,
         public readonly ?DateTimeImmutable $created = null,
         public ?DateTimeImmutable $updated = null

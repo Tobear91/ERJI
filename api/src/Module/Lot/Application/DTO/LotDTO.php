@@ -11,6 +11,6 @@ final class LotDTO
         public string $label,
         public string $created,
         public string $updated,
-        public ChantierLightDTO $chantier,
+        public ?ChantierLightDTO $chantier = null,
     ) {}
 }

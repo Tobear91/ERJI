@@ -28,6 +28,6 @@ class LotService
 
         $this->lot_repository->save($record);
 
-        return LotMapper::toDTO(LotMapper::toDomain($record));
+        return LotMapper::toDTO(LotMapper::toDomain($record), false);
     }
 }
