@@ -6,6 +6,8 @@ use App\Module\Contact\Application\Action\ContactCreateAction;
 use App\Module\Contact\Application\Action\ContactFindAllAction;
 use App\Module\ContactFunction\Application\Action\ContactFunctionCreateAction;
 use App\Module\ContactFunction\Application\Action\ContactFunctionFindAllAction;
+use App\Module\Intervenant\Application\Action\IntervenantCreateAction;
+use App\Module\Intervenant\Application\Action\IntervenantFindAllAction;
 use App\Module\Lot\Application\Action\LotCreateAction;
 use App\Module\Lot\Application\Action\LotFindAllAction;
 use App\Module\Societe\Application\Action\SocieteCreateAction;
@@ -45,5 +47,9 @@ return function (App $app) {
     $app->group('/lots', function (RouteCollectorProxy $group) {
         $group->get('', LotFindAllAction::class);
         $group->post('', LotCreateAction::class);
+    });
+    $app->group('/intervenants', function (RouteCollectorProxy $group) {
+        $group->get('', IntervenantFindAllAction::class);
+        $group->post('', IntervenantCreateAction::class);
     });
 };

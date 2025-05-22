@@ -2,6 +2,7 @@
 
 namespace App\Module\Chantier\Infrastructure\Doctrine\Entity;
 
+use App\Module\Intervenant\Infrastructure\Doctrine\Entity\IntervenantRecord;
 use App\Module\Lot\Infrastructure\Doctrine\Entity\LotRecord;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -38,12 +39,16 @@ class ChantierRecord
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: LotRecord::class)]
     private Collection $lots;
 
+    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: IntervenantRecord::class)]
+    private Collection $intervenants;
+
     public function __construct()
     {
         $this->id = Uuid::uuid4()->toString();
         $this->created = new DateTimeImmutable();
         $this->updated = new DateTimeImmutable();
         $this->lots = new ArrayCollection();
+        $this->intervenants = new ArrayCollection();
     }
 
     public function getId(): string
@@ -125,5 +130,10 @@ class ChantierRecord
     public function getLots(): Collection
     {
         return $this->lots;
+    }
+
+    public function getIntervenants(): Collection
+    {
+        return $this->intervenants;
     }
 }

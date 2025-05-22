@@ -36,6 +36,13 @@ final class ContactFunctionMapper
         );
     }
 
+    public static function toLightDTOFromRecord(ContactFunctionRecord $record): ContactFunctionLightDTO
+    {
+        return new ContactFunctionLightDTO(
+            label: $record->getLabel(),
+        );
+    }
+
     public static function toRecord(ContactFunction $contact_function): ContactFunctionRecord
     {
         $record = new ContactFunctionRecord();

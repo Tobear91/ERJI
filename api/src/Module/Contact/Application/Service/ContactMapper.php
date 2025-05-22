@@ -46,12 +46,24 @@ final class ContactMapper
     public static function toLightDTO(Contact $contact): ContactLightDTO
     {
         return new ContactLightDTO(
-            id: $contact->id,
             firstname: $contact->firstname,
             lastname: $contact->lastname,
             email: $contact->email,
             phone: $contact->phone,
+            societe: $contact->societe,
             contact_function: ContactFunctionMapper::toLightDTO($contact->contact_function),
+        );
+    }
+
+    public static function toLightDTOFromRecord(ContactRecord $record): ContactLightDTO
+    {
+        return new ContactLightDTO(
+            firstname: $record->getFirstname(),
+            lastname: $record->getLastname(),
+            email: $record->getEmail(),
+            phone: $record->getPhone(),
+            societe: SocieteMapper::toLightDTOFromRecord($record->getSociete()),
+            contact_function: ContactFunctionMapper::toLightDTOFromRecord($record->getContactFunction()),
         );
     }
 

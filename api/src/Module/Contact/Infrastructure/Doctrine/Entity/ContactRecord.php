@@ -2,10 +2,12 @@
 
 namespace App\Module\Contact\Infrastructure\Doctrine\Entity;
 
-use App\Module\ContactFunction\Domain\Entity\ContactFunction;
 use App\Module\ContactFunction\Infrastructure\Doctrine\Entity\ContactFunctionRecord;
+use App\Module\Intervenant\Infrastructure\Doctrine\Entity\IntervenantRecord;
 use App\Module\Societe\Infrastructure\Doctrine\Entity\SocieteRecord;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -43,11 +45,15 @@ class ContactRecord
     #[ORM\JoinColumn(nullable: false)]
     private ContactFunctionRecord $contact_function;
 
+    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: IntervenantRecord::class)]
+    private Collection $intervenants;
+
     public function __construct()
     {
         $this->id = Uuid::uuid4()->toString();
         $this->created = new DateTimeImmutable();
         $this->updated = new DateTimeImmutable();
+        $this->intervenants = new ArrayCollection();
     }
 
     public function getId(): string
@@ -128,5 +134,10 @@ class ContactRecord
     public function setContactFunction(ContactFunctionRecord $contact_function): void
     {
         $this->contact_function = $contact_function;
+    }
+
+    public function getIntervenants(): Collection
+    {
+        return $this->intervenants;
     }
 }
